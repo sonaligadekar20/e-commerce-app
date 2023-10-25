@@ -23,20 +23,25 @@ function Home() {
             <div className="main-container">
                 {
                     product.map((product, index) => {
-                        const { name, description, price, productImage, brand } = product;
+                        const {_id, name, description, price, productImage, brand } = product;
                         return (
 
-                            <div key={index} className="product-card">
+                            <div key={index} className="product-card" >
+                             {/* onClick={()=>{
+                                window.open(`/student-detail/${_id}`,'_blank')
+                             }}> */}
                                 <div className="product-container">
                                     <div>
                                         <img src={productImage} className="product-img" />
                                     </div>
 
                                     <div>
+                                                                               
                                         <h1>{name}</h1>
                                         {description}
                                         <h2>{price}</h2>
                                         <h3>{brand}</h3>
+                                        <a href={`product-detail/${_id}`} target='_blank'> Views Details</a>
                                     </div>
                                 </div>
 
