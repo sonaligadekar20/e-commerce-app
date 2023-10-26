@@ -10,7 +10,12 @@ function AddProduct() {
     const [productImage, setProductImage] = useState('');
     const [brand, setBrand] = useState('');
 
-    const adddetails = async () => {
+    const addDetails = async () => {
+        if(!name || !description || !price || !productImage || !brand) {
+            alert('Please enter all fields')
+            return
+        }
+
         const details = {
             name,
             description,
@@ -19,7 +24,6 @@ function AddProduct() {
             brand
         }
         await axios.post('/product', details)
-
     }
     return (
         <div>
@@ -56,7 +60,7 @@ function AddProduct() {
                     value={brand}
                     onChange={(e) => { setBrand(e.target.value) }} />
 
-                <button type='button' onClick={adddetails}className='btn' >Add Product</button>
+                <button type='button' onClick={addDetails}className='btn' >Add Product</button>
             </form>
        
         </div>

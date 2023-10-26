@@ -5,19 +5,26 @@ import "./Home.css";
 function Home() {
     const [product, setProduct] = useState([]);
 
-    const loadproduct = async () => {
+    const loadProducts = async () => {
         const response = await axios.get('/products');
         // console.log(response?.data?.data);  
         setProduct(response?.data?.data)
     }
 
+    const deleteProduct = async (_id) =>{
+        // alert(_id)
+        const response = await axios.delete(`/product/${_id}`)
+        if(response?.data?.success){
+            loadProducts();
+        }
+    }
+
     useEffect(() => {
-        loadproduct()
+        loadProducts()
     }, [])
 
+    return (  
 
-
-    return (
         <>
             <h1 className="text-center">Add Product</h1>
             <div className="main-container">
@@ -31,22 +38,17 @@ function Home() {
                                 window.open(`/student-detail/${_id}`,'_blank')
                              }}> */}
                                 <div className="product-container">
-                                    <div>
-                                        <img src={productImage} className="product-img" />
-                                    </div>
-
-                                    <div>
-                                                                               
-                                        <h1>{name}</h1>
+                                    
+                                        <img src={productImage} className="product-img" />                                     
+                                        <h2 className="product-name">{name}</h2>
                                         {description}
-                                        <h2>{price}</h2>
+                                        <h3>{price}</h3>
                                         <h3>{brand}</h3>
                                         <a href={`product-detail/${_id}`} target='_blank'> Views Details</a>
-                                    </div>
+                                        <button className="btn-delete-student" onClick={() => {deleteProduct(_id)}}> 🗑️ </button>
+                                        <a href={`update-product/${_id}`} target='_blank' className="btn-edit-product"> 🖋️</a>
                                 </div>
-
                             </div>
-
                         )
                     })
                 }

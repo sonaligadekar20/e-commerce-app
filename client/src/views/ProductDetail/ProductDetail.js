@@ -10,7 +10,7 @@ function ProductDetail(){
     
     const loadProduct = async () =>{
         const response = await axios.get(`/product/${_id}`);
-        setProduct(response?.data?.data)
+        setProduct(response?.data?.data)    
     }
 
     useEffect(()=>{
